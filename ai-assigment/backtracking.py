@@ -4,7 +4,12 @@ from enum import Flag, auto
 from functools import wraps
 from typing import TypeVar
 N = 9
+
 def singleton(cls):
+    """Singleton decorator
+    
+    cls(x, y) is cls(x, y)
+    """
     instances = {}
     def get_instance(*args, **kwargs):
         # Here args[0], args[1] are considered as x and y, the unique pair for instantiation.
@@ -46,21 +51,14 @@ class Node:
     node_type: NodeType | None = None
     cost: float = float('inf')
     
-    
-    parent: Node | None = None
-
     visited: bool = False
-    
-    @property
-    def minimal_path(self) -> list[tuple[int,int]]:
-        if (self.x, self.y) == (0, 0):
-            return [(0, 0)]
-        if self.parent is None:
-            raise ValueError()
-        return self.parent.minimal_path + [(self.x, self.y)]
-    
+
     @property
     def heuristic(self) -> float:
+        """distance to goal. only defined for nodes with type, in other case -1
+        
+        return float('inf'), if DangerZone  
+        """
         if self.node_type is None:
             return -1
         if self.node_type not in NodeType.DangerZone:
@@ -111,6 +109,7 @@ def create_path(current_path: list[T], target_path: list[T]) -> list[T]:
     return path
 
 def move(x, y):
+    """prosedure of movement. discard information from iterator"""
     print(f'm {x} {y}')
     n = int(input())
     for _ in range(n):
@@ -129,8 +128,11 @@ x, y = 0, 0
 
 min_result = float('inf')
 
-visited = {(0,0)}
 def backtraking(x, y, cost = 0):
+    """find minimal path from x, y to a goal.
+    
+    update global variable 'min_result'"""
+    
     global min_result
     
     print(f'm {x} {y}')

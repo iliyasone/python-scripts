@@ -1,9 +1,9 @@
 . . . . . . . . .
+. . . . . . S . I
 . . . . . . . . .
 . . . . . . . . .
-. . . P P P . . .
-. . . P T P . . S
-. . . P P P . P .
-. . . P . . P H P
-. . P P P . . P .
-. P P M P P . . I
+P P . . P P P . .
+H P P . P T P . .
+P M P P P P P . .
+P P P . . . . . .
+. P . . . . . . .
